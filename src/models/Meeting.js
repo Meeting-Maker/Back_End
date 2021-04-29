@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-   const meeting = sequelize.define('meeting', {
-      id :  {
+   const Meeting = sequelize.define('Meeting', {
+      meetingID :  {
          type: DataTypes.STRING(6),
          allowNull: false,
          primaryKey: true
@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       description: {
          type: DataTypes.STRING(256)
       },
-      poll_type: {
+      pollType: {
          type: DataTypes.INTEGER,
          defaultValue: 0
       },
    });
 
-   return meeting;
+   return Meeting;
 }

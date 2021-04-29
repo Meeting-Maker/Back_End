@@ -1,24 +1,24 @@
 module.exports = (sequelize, DataTypes) => {
-   const vote = sequelize.define('vote', {
-      candidate_meeting_id :  {
+   const Vote = sequelize.define('Vote', {
+      candidateID: {
          type: DataTypes.INTEGER,
          allowNull: false,
          primaryKey: true,
          references: {
-            model: 'candidate_meetings',
-            key: 'id'
+            model: 'CandidateMeetings',
+            key: 'candidateID'
          }
       },
-      user_id: {
+      userID: {
          type: DataTypes.INTEGER,
          allowNull: false,
          primaryKey: true,
          references: {
-            model: 'users',
+            model: 'Users',
             key: 'id'
          }
       }
    });
 
-   return vote;
+   return Vote;
 }

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-   const candidate_meeting = sequelize.define('candidate_meeting', {
-      id :  {
+   const CandidateMeeting = sequelize.define('CandidateMeeting', {
+      candidateID :  {
          type: DataTypes.INTEGER,
          allowNull: false,
          primaryKey: true,
@@ -14,15 +14,15 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING(19),
          allowNull: false
       },
-      meeting_id: {
+      meetingID: {
          type: DataTypes.STRING(6),
          allowNull: false,
          references: {
-            model: 'meetings',
-            key: 'id'
+            model: 'Meetings',
+            key: 'meetingID'
          }
       }
    });
 
-   return candidate_meeting;
+   return CandidateMeeting;
 }
