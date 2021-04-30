@@ -74,7 +74,7 @@ Schema Link: [https://dbdesigner.page.link/qtrAR5PFpRhqWBDJ8](https://dbdesigner
 
 This project will be hosted on AWS.
 
-LINK: [https://www.meetingmaker.com](https://www.meetingmaker.com)
+LINK: [https://www.meetingmaker.com](https://www.meetingmaker.ca)
 
 # Scrum:
 
