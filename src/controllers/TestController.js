@@ -1,11 +1,11 @@
-const { vote } = require('../models')
+const { MeetingMember } = require('../models')
 
 module.exports = {
    async hello(req, res) {
       try {
-         const users = await vote.create({
-            user_id: 1,
-            candidate_meeting_id : 1
+         const users = await MeetingMember.create({
+           meeting_id: 'abcdfe',
+            user_id: 4
          });
          res.send(users);
       } catch (err){

@@ -1,20 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
-   const meeting_member = sequelize.define('meeting_member', {
-      meeting_id :  {
+   const MeetingMember = sequelize.define('MeetingMember', {
+      meetingID :  {
          type: DataTypes.STRING(6),
          allowNull: false,
          primaryKey: true,
          references: {
-            model: 'meetings',
-            key: 'id'
+            model: 'Meetings',
+            key: 'meetingID'
          }
       },
-      user_id: {
+      userID: {
          type: DataTypes.INTEGER,
          allowNull: false,
          primaryKey: true,
          references: {
-            model: 'users',
+            model: 'Users',
             key: 'id'
          }
       },
@@ -24,5 +24,5 @@ module.exports = (sequelize, DataTypes) => {
       },
    });
 
-   return meeting_member;
+   return MeetingMember;
 }
