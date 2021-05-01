@@ -10,6 +10,7 @@ module.exports = {
                 meetingID: req.body.meetingID,
                 title: req.body.title,
                 description: req.body.description,
+                dueDate: req.body.dueDate,
                 pollType: req.body.pollType
             });
             await MeetingMember.create({
