@@ -22,19 +22,21 @@ module.exports = (app) => {
 
    app.post('/createGuestMeeting', MeetingController.createGuestMeeting);
 
-   app.post('/editMeetingType', MeetingController.editMeetingType)
+   app.post('/editMeetingType', MeetingController.editMeetingType);
 
-   app.post('/editMeetingDetails', MeetingController.editMeetingDetails)
+   app.post('/editMeetingDetails', MeetingController.editMeetingDetails);
 
    app.delete('/deleteMeeting', MeetingController.deleteMeeting);
 
    // Candidate meeting
 
-   app.post('/createCandidateMeeting', CandidateMeetingController.createCandidateMeeting)
+   app.post('/createCandidateMeeting', CandidateMeetingController.createCandidateMeeting);
 
-   app.post('/editCandidateMeeting', CandidateMeetingController.editCandidateMeeting)
+   app.post('/editCandidateMeeting', CandidateMeetingController.editCandidateMeeting);
 
-   app.delete('/deleteCandidateMeeting', CandidateMeetingController.deleteCandidateMeeting)
+   app.delete('/deleteCandidateMeeting', CandidateMeetingController.deleteCandidateMeeting);
+
+   app.get('/getCandidateMeetings', CandidateMeetingController.getCandidateMeetings);
 
    // Vote
 

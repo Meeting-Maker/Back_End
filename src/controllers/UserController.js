@@ -28,11 +28,10 @@ module.exports = {
    },
    async login(req, res) {
       try {
-         console.log(req.body);
          const {email, password} = req.body;
          const user = await User.findOne({
             where: {
-               email: email,
+               email: email
             }
          });
          if (!user)
@@ -50,7 +49,6 @@ module.exports = {
             token: jwtSignUser(userJson)
          });
       } catch (error) {
-         console.log(error)
          res.status(500).send({
             error: `An error occurred while trying to log in`
          })
@@ -73,7 +71,6 @@ module.exports = {
                   id: userid[i].userID
                }
             }));
-             console.log(userid[i].userID);
          }
          res.send({
             users
@@ -98,7 +95,6 @@ module.exports = {
 
          res.send(newUser);
       } catch (error) {
-         console.log(error);
          res.status(500).send({
             error: 'Something went wrong with creating a guest user, please try again later'
          })
