@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.INTEGER,
          defaultValue: 0
       },
+      dueDate: {
+         type: DataTypes.STRING(19),
+         allowNull: false
+      }
    });
 
    return Meeting;

@@ -3,15 +3,20 @@ const UserController = require('./controllers/UserController');
 const MeetingController = require('./controllers/MeetingController');
 const CandidateMeetingController = require('./controllers/CandidateMeetingController');
 const Vote = require('./controllers/VoteController');
+const AuthenticationControllerPolicy = require('./policy/AuthenticationControllerPolicy')
 
 module.exports = (app) => {
    app.get('/test', TestController.hello);
 
    // User routes
 
+   app.post('/register',  AuthenticationControllerPolicy.register, UserController.register);
+
+   app.post('/login', UserController.login);
+
    app.post('/createGuestUser', UserController.createGuestUser);
 
-   app.get('/getUser', UserController.getUser);
+   app.get('/getUsers', UserController.getUsers);
 
    // Meeting
 

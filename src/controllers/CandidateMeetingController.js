@@ -6,6 +6,7 @@ module.exports = {
          const candidateMeeting = await CandidateMeeting.create({
             start: req.body.start,
             end: req.body.end,
+            length: req.body.length,
             meetingID: req.body.meetingID
          });
          res.send(candidateMeeting);

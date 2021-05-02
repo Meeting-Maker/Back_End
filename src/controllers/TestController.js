@@ -4,8 +4,8 @@ module.exports = {
    async hello(req, res) {
       try {
          const users = await MeetingMember.create({
-           meeting_id: 'abcdfe',
-            user_id: 4
+           meetingID: 'abcdfe',
+            userID: 0
          });
          res.send(users);
       } catch (err){
