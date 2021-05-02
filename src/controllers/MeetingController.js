@@ -3,6 +3,7 @@ const {User, Meeting, MeetingMember, CandidateVote, Vote} = require('../models')
 module.exports = {
     async createGuestMeeting(req, res) {
         try {
+            console.log(req.body);
             const user = await User.create({
                 name: req.body.name
             });
@@ -20,6 +21,7 @@ module.exports = {
             });
             res.send();
         } catch (error) {
+            console.log(error);
             res.status(500).send({
                 error: 'Something went wrong with creating a meeting, please try again later'
             })

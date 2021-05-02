@@ -56,19 +56,19 @@ module.exports = {
          })
       }
    },
-   async getUser(req, res) {
+   async getUsers(req, res) {
       try {
          const userid = await MeetingMember.findAll({
-            attributes: ['user_id', 'role'],
+            attributes: ['userID', 'role'],
             where: {
                meetingID: req.query.meetingID
             }
          });
 
-         const name = [];
+         const users = [];
          for (const i in userid) {
-             name.push(await User.findOne({
-               attributes: ['name'],
+             users.push(await User.findOne({
+               attributes: ['name', 'id'],
                where: {
                   id: userid[i].userID
                }
@@ -76,7 +76,7 @@ module.exports = {
              console.log(userid[i].userID);
          }
          res.send({
-            name
+            users
          });
       } catch (error) {
          console.log(error);
@@ -90,6 +90,12 @@ module.exports = {
          const newUser = await User.create({
             name: req.body.name
          });
+
+         await MeetingMember.create({
+            meetingID: req.body.meetingID,
+            userID: newUser.id
+         });
+
          res.send(newUser);
       } catch (error) {
          console.log(error);
@@ -98,5 +104,4 @@ module.exports = {
          })
       }
    }
-
 }

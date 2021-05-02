@@ -16,7 +16,7 @@ module.exports = (app) => {
 
    app.post('/createGuestUser', UserController.createGuestUser);
 
-   app.get('/getUser', UserController.getUser);
+   app.get('/getUsers', UserController.getUsers);
 
    // Meeting
 
