@@ -36,6 +36,8 @@ module.exports = (app) => {
 
    app.delete('/deleteCandidateMeeting', CandidateMeetingController.deleteCandidateMeeting)
 
+   app.get('/getCandidateMeetings', CandidateMeetingController.getCandidateMeetings)
+
    // Vote
 
    app.post('/createVote', Vote.createVote);

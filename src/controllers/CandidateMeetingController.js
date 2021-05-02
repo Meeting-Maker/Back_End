@@ -52,5 +52,26 @@ module.exports = {
             error: 'Something went wrong with deleting candidate meeting , please try again later'
          });
       }
+   },
+   async getCandidateMeetings(req, res) {
+      try{
+         const candidateMeetings = await CandidateMeeting.findAll({
+            attributes: ['candidateID', 'start', 'end', 'meetingID', 'length'],
+            where: {
+               meetingID: req.query.meetingID
+            }
+         });
+
+         console.log(candidateMeetings);
+
+         res.send({
+            candidateMeetings
+         });
+      }catch(error){
+         console.log(error);
+         res.status(500).send({
+            error: 'Something went wrong retrieving candidate meetings'
+         });
+      }
    }
 }

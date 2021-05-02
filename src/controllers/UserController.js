@@ -58,7 +58,7 @@ module.exports = {
    },
    async getUsers(req, res) {
       try {
-         const userid = await MeetingMember.findAll({
+         const userList = await MeetingMember.findAll({
             attributes: ['userID', 'role'],
             where: {
                meetingID: req.query.meetingID
@@ -66,14 +66,14 @@ module.exports = {
          });
 
          const users = [];
-         for (const i in userid) {
+         for (const user in userList) {
              users.push(await User.findOne({
                attributes: ['name', 'id'],
                where: {
-                  id: userid[i].userID
+                  id: userList[user].userID
                }
             }));
-             console.log(userid[i].userID);
+             console.log(userList[user].userID);
          }
          res.send({
             users
