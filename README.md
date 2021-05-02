@@ -2,15 +2,28 @@
 
 MeetingMaker is a simple tool where multiple users can input their availability schedule to find overlaps. The idea is to offer a simple way to choose a meeting time, as fast as possible. We think this will be useful for Teams with variable schedules.
 
-# Features:
+# Versions:
+### Release 0.1.0 (May 9th, 2021)
+##### New Features:
+-   Creating a guest event
+-   Joining an event as a guest
+-   Navigating to an event by URL or /join page
+-   Poll feature for deciding meeting time
+-   Viewing poll results
+-   Removing guest user and their votes from a meeting
+-   Comment Feature
+-   Editing Candidate Meeting list
+-   Editing Meeting Details
 
-MeetingMaker for users without accounts; events will be shared with a link; no authentication. We think this will create a good first impression, for users who do not like having many accounts.
-
-  
-
-MeetingMaker for users with accounts will have more features. Calendars are more secure as they are locked behind additional security. User profiles can have saved availability which can be automatically applied to events. Users can create Teams with members of varying rank and permissions. Logged in users can also opt into email notifications when a meeting is scheduled for their team, when one of their teams receives a new meeting request, or when a team leader.
-
-The final product should include export of calendar event files, especially including outlook for business use.
+### Future Releases
+-   Create account and login
+-   Find meeting time by common availability
+-   User page to view joined meetings
+-   Teams with multiple users who often share meetings
+-   User rank and permission in Team
+-   Email notifications when: invited to team, meeting time is decided, somebody votes on meeting or inputs their time, meeting is happening soon.
+-   Saved availability for user profiles which can automatically be applied to meetings.
+-   Export decided meeting as an event-file for other calendar softwares.
 
 # Glossary:
 
