@@ -54,5 +54,56 @@ module.exports = {
             error: `An error occurred while trying to log in`
          })
       }
+<<<<<<< HEAD
+   },
+   async getUsers(req, res) {
+      try {
+         const userList = await MeetingMember.findAll({
+            attributes: ['userID', 'role'],
+            where: {
+               meetingID: req.query.meetingID
+            }
+         });
+
+         const users = [];
+         for (const user in userList) {
+             users.push(await User.findOne({
+               attributes: ['name', 'id'],
+               where: {
+                  id: userList[user].userID
+               }
+            }));
+             console.log(userList[user].userID);
+         }
+         res.send({
+            users
+         });
+      } catch (error) {
+         console.log(error);
+         res.status(500).send({
+            error: 'Something went wrong with getting users in this meeting, please try again later'
+         })
+      }
+   },
+   async createGuestUser(req, res) {
+      try {
+         const newUser = await User.create({
+            name: req.body.name
+         });
+
+         await MeetingMember.create({
+            meetingID: req.body.meetingID,
+            userID: newUser.id
+         });
+
+         res.send(newUser);
+      } catch (error) {
+         console.log(error);
+         res.status(500).send({
+            error: 'Something went wrong with creating a guest user, please try again later'
+         })
+      }
+=======
+>>>>>>> 977c5ef51fc032fdec40c37a092138d3b2d6f29d
    }
 }
