@@ -1,4 +1,4 @@
-const {User} = require('../models')
+const {User, MeetingMember} = require('../models')
 
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
@@ -54,7 +54,6 @@ module.exports = {
             error: `An error occurred while trying to log in`
          })
       }
-<<<<<<< HEAD
    },
    async getUsers(req, res) {
       try {
@@ -103,7 +102,5 @@ module.exports = {
             error: 'Something went wrong with creating a guest user, please try again later'
          })
       }
-=======
->>>>>>> 977c5ef51fc032fdec40c37a092138d3b2d6f29d
    }
 }
