@@ -1,4 +1,4 @@
-const {User, MeetingMember} = require('../models')
+const {User} = require('../models')
 
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
@@ -11,6 +11,7 @@ function jwtSignUser(user) {
 }
 
 module.exports = {
+   // update this function
    async register(req, res) {
       try {
          const user = await User.create(req.body);
@@ -28,11 +29,10 @@ module.exports = {
    },
    async login(req, res) {
       try {
-         console.log(req.body);
          const {email, password} = req.body;
          const user = await User.findOne({
             where: {
-               email: email,
+               email: email
             }
          });
          if (!user)
@@ -50,11 +50,11 @@ module.exports = {
             token: jwtSignUser(userJson)
          });
       } catch (error) {
-         console.log(error)
          res.status(500).send({
             error: `An error occurred while trying to log in`
          })
       }
+<<<<<<< HEAD
    },
    async getUsers(req, res) {
       try {
@@ -103,5 +103,7 @@ module.exports = {
             error: 'Something went wrong with creating a guest user, please try again later'
          })
       }
+=======
+>>>>>>> 977c5ef51fc032fdec40c37a092138d3b2d6f29d
    }
 }

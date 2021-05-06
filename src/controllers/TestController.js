@@ -1,13 +1,8 @@
-const { MeetingMember } = require('../models')
-
 module.exports = {
    async hello(req, res) {
       try {
-         const users = await MeetingMember.create({
-           meetingID: 'abcdfe',
-            userID: 0
-         });
-         res.send(users);
+         console.log('hello');
+         res.send();
       } catch (err){
          console.log(err);
          res.status(500).send({
