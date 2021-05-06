@@ -1,6 +1,26 @@
 const {CandidateMeeting, Vote} = require('../models');
 
 module.exports = {
+   async getCandidateMeetings(req, res) {
+      try{
+         console.log(req.query.meetingID)
+         const candidateMeetings = await CandidateMeeting.findAll({
+            attributes: ['candidateID', 'start', 'end', 'meetingID', 'length'],
+            where: {
+               meetingID: req.query.meetingID
+            }
+         });
+
+         res.send({
+            candidateMeetings
+         });
+      }catch(error){
+         console.log(error);
+         res.status(500).send({
+            error: 'Something went wrong retrieving candidate meetings'
+         });
+      }
+   },
    async createCandidateMeeting(req, res) {
       try {
          const candidateMeeting = await CandidateMeeting.create({
@@ -22,6 +42,7 @@ module.exports = {
          const candidateMeeting = await CandidateMeeting.update({
             start: req.body.start,
             end: req.body.end,
+            length: req.body.length
          }, {
             where: {
                candidateID: req.body.candidateID
@@ -38,16 +59,17 @@ module.exports = {
       try {
          await Vote.destroy({
             where: {
-               candidateID: req.body.candidateID
+               candidateID: req.query.candidateID
             }
          });
          await CandidateMeeting.destroy({
             where: {
-               candidateID: req.body.candidateID
+               candidateID: req.query.candidateID
             }
          });
          res.send("success");
       } catch(error) {
+         console.log(error)
          res.status(500).send({
             error: 'Something went wrong with deleting candidate meeting , please try again later'
          });
