@@ -1,26 +1,26 @@
-const TestController = require('./controllers/TestController');
 const UserController = require('./controllers/UserController');
 const MeetingController = require('./controllers/MeetingController');
 const CandidateMeetingController = require('./controllers/CandidateMeetingController');
 const Vote = require('./controllers/VoteController');
 const AuthenticationControllerPolicy = require('./policy/AuthenticationControllerPolicy')
+const CommentController = require('./controllers/CommentController');
 
 module.exports = (app) => {
-   app.get('/test', TestController.hello);
-
    // User routes
 
    app.post('/register',  AuthenticationControllerPolicy.register, UserController.register);
 
    app.post('/login', UserController.login);
 
-   app.post('/createGuestUser', UserController.createGuestUser);
-
-   app.get('/getUsers', UserController.getUsers);
-
    // Meeting
 
+   app.get('/getMeeting', MeetingController.getMeeting)
+
    app.post('/createGuestMeeting', MeetingController.createGuestMeeting);
+
+   app.post('/addGuestUser', MeetingController.addGuestUser)
+
+   app.get('/getUsers', MeetingController.getUsers);
 
    app.post('/editMeetingType', MeetingController.editMeetingType);
 
@@ -32,16 +32,28 @@ module.exports = (app) => {
 
    app.post('/createCandidateMeeting', CandidateMeetingController.createCandidateMeeting);
 
+   app.get('/getCandidateMeetings', CandidateMeetingController.getCandidateMeetings);
+
    app.post('/editCandidateMeeting', CandidateMeetingController.editCandidateMeeting);
 
    app.delete('/deleteCandidateMeeting', CandidateMeetingController.deleteCandidateMeeting);
 
-   app.get('/getCandidateMeetings', CandidateMeetingController.getCandidateMeetings);
+   app.get('/getCandidateMeetings', CandidateMeetingController.getCandidateMeetings)
 
    // Vote
+
+   app.get('/getVote', Vote.getVote)
 
    app.post('/createVote', Vote.createVote);
 
    app.delete('/deleteVote', Vote.deleteVote);
 
+
+   // Comment
+
+   app.get('/getComments', CommentController.getComments);
+
+   app.post('/createComment', CommentController.createComment);
+
+   app.delete('/deleteComment', CommentController.deleteComment);
 }
