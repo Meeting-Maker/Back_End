@@ -83,9 +83,9 @@ module.exports = {
     },
     async getUsers(req, res) {
         try {
-            const user = getUsers(req.query.meetingID);
+            const users = await getUsers(req.query.meetingID);
             res.send({
-                user
+                users
             });
         } catch (error) {
             res.status(500).send({
