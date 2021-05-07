@@ -3,6 +3,7 @@ const MeetingController = require('./controllers/MeetingController');
 const CandidateMeetingController = require('./controllers/CandidateMeetingController');
 const Vote = require('./controllers/VoteController');
 const AuthenticationControllerPolicy = require('./policy/AuthenticationControllerPolicy')
+const CommentController = require('./controllers/CommentController');
 
 module.exports = (app) => {
    // User routes
@@ -47,4 +48,12 @@ module.exports = (app) => {
 
    app.delete('/deleteVote', Vote.deleteVote);
 
+
+   // Comment
+
+   app.get('/getComments', CommentController.getComments);
+
+   app.post('/createComment', CommentController.createComment);
+
+   app.delete('/deleteComment', CommentController.deleteComment);
 }
