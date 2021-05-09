@@ -3,19 +3,16 @@ const {Comment} = require('../models');
 module.exports = {
    async getComments(req, res) {
       try{
-         console.log(req.query.meetingID)
          const comments = await Comment.findAll({
-            attributes: ['commentID', 'meetingID', 'userID', 'content'],
+            attributes: ['commentID', 'meetingID', 'name', 'userID', 'content', 'createdAt'],
             where: {
                meetingID: req.query.meetingID
             }
          });
-
          res.send({
             comments
          });
       }catch(error){
-         console.log(error);
          res.status(500).send({
             error: 'Something went wrong retrieving comments for this meeting.'
          });
@@ -26,11 +23,12 @@ module.exports = {
          const comment = await Comment.create({
             meetingID: req.body.meetingID,
             userID: req.body.userID,
+            name: req.body.name,
             content: req.body.content
          });
          res.send(comment);
       } catch (error) {
-         console.log(error)
+         console.log(error);
          res.status(500).send({
             error: 'Something went wrong when creating this comment.'
          });
@@ -43,9 +41,8 @@ module.exports = {
                commentID: req.query.commentID
             }
          });
-         res.send("success");
+         res.send();
       } catch(error) {
-         console.log(error)
          res.status(500).send({
             error: 'Something went wrong with deleting this comment.'
          });
