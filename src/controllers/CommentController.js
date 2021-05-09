@@ -4,7 +4,7 @@ module.exports = {
    async getComments(req, res) {
       try{
          const comments = await Comment.findAll({
-            attributes: ['commentID', 'meetingID', 'name', 'userID', 'content', 'createdAt'],
+            attributes: ['commentID', 'meetingID', 'userID', 'name', 'content', 'createdAt'],
             where: {
                meetingID: req.query.meetingID
             }
@@ -28,7 +28,6 @@ module.exports = {
          });
          res.send(comment);
       } catch (error) {
-         console.log(error);
          res.status(500).send({
             error: 'Something went wrong when creating this comment.'
          });

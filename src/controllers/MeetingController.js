@@ -104,7 +104,6 @@ module.exports = {
             });
             res.send({userID: user.id});
         } catch (error) {
-            console.log(error);
             res.status(500).send({
                 error: 'Something went wrong with adding a user to the meeting, please try again later'
             })
@@ -145,7 +144,6 @@ module.exports = {
     },
     async deleteMeeting(req, res) {
         try {
-            console.log(req.body, req);
             const users = await MeetingMember.findAll({
                 attributes: ['userID'],
                 where: {
