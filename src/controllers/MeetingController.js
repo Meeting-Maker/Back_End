@@ -102,8 +102,9 @@ module.exports = {
                 userID: user.id,
                 meetingID: req.body.meetingID
             });
-            res.status(200).send();
+            res.send({userID: user.id});
         } catch (error) {
+            console.log(error);
             res.status(500).send({
                 error: 'Something went wrong with adding a user to the meeting, please try again later'
             })
