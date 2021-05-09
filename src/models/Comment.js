@@ -26,7 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: {
          type: DataTypes.STRING(40),
-         allowNull: false
+         allowNull: false,
+         references: {
+            model: 'Users',
+            key: 'name'
+         }
       },
       content :  {
          type: DataTypes.STRING(512),
