@@ -16,6 +16,8 @@ module.exports = (app) => {
 
    app.get('/getMeeting', MeetingController.getMeeting)
 
+   app.get('/getMeetingDetails', MeetingController.getMeetingDetails)
+
    app.post('/createGuestMeeting', MeetingController.createGuestMeeting);
 
    app.post('/addGuestUser', MeetingController.addGuestUser)
@@ -42,7 +44,7 @@ module.exports = (app) => {
 
    // Vote
 
-   app.get('/getVote', Vote.getVote)
+   app.get('/getVotes', Vote.getVotes)
 
    app.post('/createVote', Vote.createVote);
 
