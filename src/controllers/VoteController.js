@@ -3,7 +3,7 @@ const {QueryTypes} = require("sequelize");
 const {Vote} = require('../models');
 
 module.exports = {
-   async getVote(req, res) {
+   async getVotes(req, res) {
      try {
         const votes = await db.sequelize.query(`SELECT count(userID) as count, candidateID
                                                      FROM Votes

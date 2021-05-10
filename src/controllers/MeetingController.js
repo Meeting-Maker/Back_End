@@ -57,6 +57,27 @@ module.exports = {
             })
         }
     },
+    async getMeetingDetails(req, res) {
+        try {
+            const meetingDetails = await Meeting.findOne({
+                attributes: ['meetingID', 'title', 'description', 'dueDate'],
+                where: {
+                    meetingID: req.query.meetingID
+                }
+            });
+            console.log('MEETING DETAILS');
+            console.log(meetingDetails);
+            console.log('MEETING DETAILS');
+            res.send({
+                meetingDetails: meetingDetails
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({
+                error: 'Something went wrong with getting your meeting, please try again later'
+            })
+        }
+    },
     async createGuestMeeting(req, res) {
         try {
             const user = await User.create({
