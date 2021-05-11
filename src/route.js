@@ -8,7 +8,7 @@ const CommentController = require('./controllers/CommentController');
 module.exports = (app) => {
    // User routes
 
-   app.post('/register',  AuthenticationControllerPolicy.register, UserController.register);
+   app.post('/register', AuthenticationControllerPolicy.register, UserController.register);
 
    app.post('/login', UserController.login);
 
