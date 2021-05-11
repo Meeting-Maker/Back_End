@@ -22,6 +22,22 @@ async function getUsers(meetingID) {
 }
 
 module.exports = {
+    async meetingExists(req, res) {
+        try {
+            const meetingCount = await Meeting.count({
+                where: {
+                    meetingID: req.query.meetingID
+                }
+            });
+            res.send({
+                meetingExists: meetingCount === 1
+            });
+        } catch (error) {
+              res.status(500).send({
+                error: 'Something went wrong with validating your meetingID.'
+            });
+        }
+    },
     async getMeeting(req, res) {
         try {
             const users = await getUsers(req.query.meetingID);
@@ -44,7 +60,6 @@ module.exports = {
                     }
                 }));
             }
-
             res.send({
                 users,
                 candidateMeeting,
@@ -65,9 +80,6 @@ module.exports = {
                     meetingID: req.query.meetingID
                 }
             });
-            console.log('MEETING DETAILS');
-            console.log(meetingDetails);
-            console.log('MEETING DETAILS');
             res.send({
                 meetingDetails: meetingDetails
             })
@@ -97,6 +109,7 @@ module.exports = {
             });
             res.send();
         } catch (error) {
+            console.log(error);
             res.status(500).send({
                 error: 'Something went wrong with creating a meeting, please try again later'
             })
