@@ -14,13 +14,15 @@ module.exports = (app) => {
 
    // Meeting
 
-   app.get('/getMeeting', MeetingController.getMeeting)
+   app.get('/meetingExists', MeetingController.meetingExists);
+
+   app.get('/getMeeting', MeetingController.getMeeting);
 
    app.get('/getMeetingDetails', MeetingController.getMeetingDetails)
 
    app.post('/createGuestMeeting', MeetingController.createGuestMeeting);
 
-   app.post('/addGuestUser', MeetingController.addGuestUser)
+   app.post('/addGuestUser', MeetingController.addGuestUser);
 
    app.get('/getUsers', MeetingController.getUsers);
 
@@ -40,7 +42,7 @@ module.exports = (app) => {
 
    app.delete('/deleteCandidateMeeting', CandidateMeetingController.deleteCandidateMeeting);
 
-   app.get('/getCandidateMeetings', CandidateMeetingController.getCandidateMeetings)
+   app.get('/getCandidateMeetings', CandidateMeetingController.getCandidateMeetings);
 
    // Vote
 
