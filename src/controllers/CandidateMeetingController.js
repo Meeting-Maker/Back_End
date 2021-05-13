@@ -10,6 +10,7 @@ module.exports = {
             }
          });
 
+         console.log(candidateMeetings);
          res.send({
             candidateMeetings
          });

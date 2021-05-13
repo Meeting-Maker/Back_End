@@ -107,7 +107,7 @@ module.exports = {
                 meetingID: meeting.meetingID,
                 role: 1
             });
-            res.send();
+            res.send({userID: user.id});
         } catch (error) {
             console.log(error);
             res.status(500).send({
