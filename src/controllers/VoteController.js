@@ -9,16 +9,16 @@ module.exports = {
            }
         });
 
-        const voteInformation = await Vote.findAll({
+        const users = await Vote.findAll({
            attributes: ['userID'],
            where: {
               candidateID: req.query.candidateID
            }
         });
         res.send({
-           candidateID: req.query.candidateID,
+           candidateID: req.query   .candidateID,
            count: count,
-           users: voteInformation
+           users: users
         });
      }  catch (error) {
         console.log(error);

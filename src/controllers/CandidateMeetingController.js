@@ -3,18 +3,26 @@ const {CandidateMeeting, Vote} = require('../models');
 module.exports = {
    async getCandidateMeetings(req, res) {
       try{
-         const candidateMeetings = await CandidateMeeting.findAll({
+         let candidateMeetings = await CandidateMeeting.findAll({
             attributes: ['candidateID', 'start', 'end', 'meetingID', 'length'],
             where: {
                meetingID: req.query.meetingID
             }
          });
-
-         console.log(candidateMeetings);
+         for(let i = 0; i < candidateMeetings.length; i++) {
+            const voters = await Vote.findAll({
+               attributes: ['userID'],
+               where: {
+                  candidateID: candidateMeetings[i].candidateID
+               }
+            });
+            candidateMeetings[i].setDataValue('voters', voters);
+         }
          res.send({
             candidateMeetings
          });
       }catch(error){
+         console.log(error);
          res.status(500).send({
             error: 'Something went wrong retrieving candidate meetings'
          });
