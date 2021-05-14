@@ -1,21 +1,27 @@
-const db = require("../models");
-const {QueryTypes} = require("sequelize");
 const {Vote} = require('../models');
 
 module.exports = {
    async getVotes(req, res) {
      try {
-        const votes = await db.sequelize.query(`SELECT count(userID) as count, candidateID
-                                                     FROM Votes
-                                                     WHERE candidateID = ${req.query.candidateID}`, {type: QueryTypes.SELECT});
-        const voteInformation = await Vote.findAll({
-           attributes: ['candidateID', 'userID'],
+        const count = await Vote.count({
            where: {
               candidateID: req.query.candidateID
            }
         });
-        res.send(votes, voteInformation);
+
+        const voteInformation = await Vote.findAll({
+           attributes: ['userID'],
+           where: {
+              candidateID: req.query.candidateID
+           }
+        });
+        res.send({
+           candidateID: req.query.candidateID,
+           count: count,
+           users: voteInformation
+        });
      }  catch (error) {
+        console.log(error);
         res.status(500).send({
            error: 'Something went wrong with getting the meeting\'s votes, please try again later'
         })
@@ -25,7 +31,7 @@ module.exports = {
    async createVote(req, res) {
       try {
          await Vote.create({
-            candidateID: req.body.candidateID,
+            candidateID: req.body.candidateI,
             userID: req.body.userID
          });
          res.send("successfully voted")
