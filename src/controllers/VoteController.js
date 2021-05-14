@@ -21,7 +21,6 @@ module.exports = {
            users: users
         });
      }  catch (error) {
-        console.log(error);
         res.status(500).send({
            error: 'Something went wrong with getting the meeting\'s votes, please try again later'
         })
@@ -31,7 +30,7 @@ module.exports = {
    async createVote(req, res) {
       try {
          await Vote.create({
-            candidateID: req.body.candidateI,
+            candidateID: req.body.candidateID,
             userID: req.body.userID
          });
          res.send("successfully voted")

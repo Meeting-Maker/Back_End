@@ -22,7 +22,6 @@ module.exports = {
             candidateMeetings
          });
       }catch(error){
-         console.log(error);
          res.status(500).send({
             error: 'Something went wrong retrieving candidate meetings'
          });

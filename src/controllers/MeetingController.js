@@ -84,7 +84,6 @@ module.exports = {
                 meetingDetails: meetingDetails
             })
         } catch (error) {
-            console.log(error);
             res.status(500).send({
                 error: 'Something went wrong with getting your meeting, please try again later'
             })
@@ -109,7 +108,6 @@ module.exports = {
             });
             res.send({userID: user.id});
         } catch (error) {
-            console.log(error);
             res.status(500).send({
                 error: 'Something went wrong with creating a meeting, please try again later'
             })
