@@ -1,95 +1,134 @@
-# Description:
+# **Team**
 
-MeetingMaker is a simple tool where multiple users can input their availability schedule to find overlaps. The idea is to offer a simple way to choose a meeting time, as fast as possible. We think this will be useful for Teams with variable schedules.
+**Ming Chen** - front-end developer, back-end developer, database design, system admin
 
-# Versions:
-### Release 0.1.0 (May 9th, 2021)
-##### New Features:
--   Creating a guest event
--   Joining an event as a guest
--   Navigating to an event by URL or /join page
--   Poll feature for deciding meeting time
--   Viewing poll results
--   Removing guest user and their votes from a meeting
--   Comment Feature
--   Editing Candidate Meeting list
--   Editing Meeting Details
+**Brandon Klassen** - front-end developer, back-end developer, database design
 
-### Future Releases
--   Create account and login
--   Find meeting time by common availability
--   User page to view joined meetings
--   Teams with multiple users who often share meetings
--   User rank and permission in Team
--   Email notifications when: invited to team, meeting time is decided, somebody votes on meeting or inputs their time, meeting is happening soon.
--   Saved availability for user profiles which can automatically be applied to meetings.
--   Export decided meeting as an event-file for other calendar softwares.
+**Stephen Wiebe** - front-end developer
 
-# Glossary:
+# [**MeetingMaker**](https://www.meetingmaker.ca)
 
-Meeting: An event with known or unknown time and variable length. The software’s job is to determine the best time for a meeting.
+**React, Express, MySQL, AWS**
 
-  
+Front-end wireframes: [Figma](https://www.figma.com/file/HneCp15EqwKI3064FjuijC/meetingmaker)
 
-Visitor: Anybody who is using the website.
+Database schema: [DBDesigner](https://dbdesigner.page.link/qtrAR5PFpRhqWBDJ8)
 
-  
+MeetingMaker is being developed to simplify the process of scheduling a meeting. Whether the meeting is for two or more, you can easily find the time that works best for everyone. Simply share the link to your meeting and have the attendees input their preferences. View the feature list by release below:
 
-Guest: A visitor who is not logged into an account.
+## <u>Release 0.1.0</u>  (May 16th, 2020) (Sprints 1-3)
 
-  
+### **Features:**
 
-User: A visitor who is logged into an account
+- #### Create Meeting by Poll
 
-  
+  - Generate a list of options for attendees to vote on
+  - Add a meeting title, description (optional), and response due date
+  - Return to the meeting to view the votes at any time
 
-Leader: The creator of a meeting. Can be logged in or not.
+- #### Respond as Guest
 
-  
+  - Add yourself to the meeting as a guest with a custom name, click on a meeting time to cast your vote
+  - When returning to the meeting, simply select your name from the list of guests
 
-Team: A group of related users.
+- ## Comment 
 
-  
+  - Create and delete comments for other attendees to see
+  - Can be used for suggestions, vote explanations, or any other important information for future visitors
 
-Member: A user who is a part of a team.
+- #### Edit Meeting
 
-  
+  - As owner, edit your meeting details and vote options
 
-Owner: The creator of a team. An owner can assign user permissions for other members of the same team.
+### **Future:**
 
-# Project Architecture:
+- #### Intermittent Refresh
 
-![](https://lh6.googleusercontent.com/3h_ZIY9eGtk9EYjIY0NiTQdYHkdzaptf_6FK085xSmZuo5RAKgVgpYkOUSnCGacWln06lJPYXmGz4HTzZHOyK-6DFMij9I0JBECf3VlRj6otdPcySaqtRm1Ja-gTQpKjUIzDHLj2)
+  - Intermittently refresh the meeting information to retrieve new meeting details, votes, and comments from others using the site concurrently ***important**
 
-## Front End:
+- #### Finalize Meeting
 
-Language: JsX, CSS
+  - Prevent further voting and let visitors know which meeting time was decided on when they revisit
 
-Framework: React
+- #### Customize Meeting Options
 
-  
+  - Limit number of votes per guest
 
-[WireFrame](https://www.figma.com/file/HneCp15EqwKI3064FjuijC/meetingmaker)
+- #### Sort Options by Date/Votes
 
-## Back End:
+- #### Delete Guest (as owner)
 
-Language: Javascript
+  - Delete guests and their votes from the meetings
 
-Framework: Express (NodeJS)
+- #### System Messaging
 
-## Database:
+  - Important actions are logged as a comment with a description. 
+    - "Stephen removed Brandon from the meeting"
+    - "Ming deleted their comment"
+    - "Stephen removed a vote option with 2 votes (Brandon, Ming)"
+  - Can be used for suggestions, vote explanations, or any other important information for future visitors
 
-MySQL
+- #### UI/UX
 
-Schema Link: [https://dbdesigner.page.link/qtrAR5PFpRhqWBDJ8](https://dbdesigner.page.link/qtrAR5PFpRhqWBDJ8)
+  - Improve styling, especially on mobile
+  - Place instructions on each page to assist the user
+  - Introduce more user-friendly terminology and spacing to make use more intuitive
+  - Make it evident which guest you are currently 'signed in' as
+  - Make it more evident which meetings each guest voted for
+  - Introduce pop-ups explaining functionality, especially explaining how to share your meeting
+  - Make the page feel more alive by using :hover: styling
 
-## Hosting:
+- #### Security
 
-This project will be hosted on AWS.
+  - Sanitize inputs and URL parameters for protection against SQLI, XSS, parameter pollution
+  - Disallow use in iFrame for protection against clickjacking
+  - Remove ReDoS vulnerabilities by updating or replacing dependencies
 
-LINK: [https://www.meetingmaker.com](https://www.meetingmaker.ca)
+### **Bugs:**
 
-# Scrum:
+- Any guest can delete vote options or edit candidate meetings
+- There are currently no cancel buttons when selecting edit, forcing the user to make a change or revisit the meeting
+- On meeting edit, the current meeting information does not pre-populate the form
+- Create Comment component does not stick to the bottom of the page
+- 'meeting' and 'maker' separate by line break, acting unlike a logo
+- Many more...
+
+## <u>Release 0.2.0</u>  (future)
+
+### **Features:**
+
+- #### Login
+
+  - Create an account to save your name and easily view a list of previous meetings
+  - Write in your availability in your profile, and save your meeting time preferences
+  - Return to the meeting to view the votes at any time
+
+- #### Export Meeting to Calendar
+
+  - Export your meeting to another calendar, such as Outlook
+
+- #### Email
+
+  - Receive the meeting file in your email when a time is decided on
+  - Receive email notifications when:
+    - you are invited to attend a meeting
+    - everyone responds to the poll
+    - a meeting time is decided
+
+## <u>Release 0.3.0</u>  (future)
+
+### **Features:**
+
+- #### Create Meeting by Common Availability
+
+  - Have attendees input times when they are available or not available
+  - Return to the meeting to view the best times for everyone, based on overlap in availability
+
+- #### Teams
+
+  - Create Teams of logged in users to expedite the process, for groups who meet often
+
+# **Scrum**
 
 ## Weekly Meetings:
 
@@ -105,4 +144,6 @@ Plan & Estimate (25 April 2021)
 
 Sprint 1 (27/28 April 2021- 2 May 2021)
 
-Sprint 2 (3 April 2021- 9 May 2021)
+Sprint 2 (3 May 2021- 9 May 2021)
+
+Sprint 3 (10 May 2021- 16 May 2021) **Release 0.1.0**
