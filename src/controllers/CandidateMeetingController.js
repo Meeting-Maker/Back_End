@@ -62,18 +62,20 @@ module.exports = {
    },
    async deleteCandidateMeeting(req, res) {
       try {
+         const candidateID = req.query.candidateID
          await Vote.destroy({
             where: {
-               candidateID: req.query.candidateID
+               candidateID: candidateID
             }
          });
          await CandidateMeeting.destroy({
             where: {
-               candidateID: req.query.candidateID
+               candidateID: candidateID
             }
          });
-         res.send("success");
+         res.send({});
       } catch(error) {
+         console.log(error)
          res.status(500).send({
             error: 'Something went wrong with deleting candidate meeting , please try again later'
          });
