@@ -1,16 +1,13 @@
 const {Comment} = require('../models');
+const db  = require('../models');
 
 module.exports = {
    async getComments(req, res) {
       try{
-         const comments = await Comment.findAll({
-            attributes: ['commentID', 'meetingID', 'userID', 'name', 'content', 'createdAt'],
-            where: {
-               meetingID: req.query.meetingID
-            }
-         });
+         const comments = await db.sequelize.query(`select c.commentID, c.meetingID, c.userID, c.content, c.createdAt, u.name from Comments c inner join users u on c.userID = u.id AND meetingID = '${req.query.meetingID}'`);
+         console.log(comments)
          res.send({
-            comments
+            comments : comments[0]
          });
       }catch(error){
          res.status(500).send({
@@ -20,12 +17,12 @@ module.exports = {
    },
    async createComment(req, res) {
       try {
-         const comment = await Comment.create({
+         let comment = await Comment.create({
             meetingID: req.body.meetingID,
             userID: req.body.userID,
-            name: req.body.name,
             content: req.body.content
          });
+         Object.assign(comment.dataValues, {name: req.body.name})
          res.send(comment);
       } catch (error) {
          res.status(500).send({
