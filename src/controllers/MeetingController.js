@@ -1,6 +1,7 @@
 const {QueryTypes} = require("sequelize");
-const {User, Meeting, MeetingMember, CandidateVote, Vote, CandidateMeeting} = require('../models')
-const db = require('../models')
+const {User, Meeting, MeetingMember, CandidateVote, Vote, CandidateMeeting} = require('../models');
+const db = require('../models');
+const { customAlphabet } = require("nanoid");
 
 async function getUsers(meetingID) {
     const userID = await MeetingMember.findAll({
@@ -19,6 +20,22 @@ async function getUsers(meetingID) {
         }));
     }
     return users;
+}
+
+async function createUniqueID(counter) {
+    const id = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 6)();
+    const check = await Meeting.findOne({
+        where: {
+            meetingID: id
+        }
+    })
+    if(counter === 25)
+        return null;
+    else if(check)
+        // eslint-disable-next-line no-unused-vars
+        return await createUniqueID(++counter);
+    else
+        return id;
 }
 
 module.exports = {
@@ -94,8 +111,14 @@ module.exports = {
             const user = await User.create({
                 name: req.body.name
             });
+
+            const id = await createUniqueID(0);
+            if(id === null)
+                res.status(500).send({
+                    error: 'Something went wrong with creating a meeting, please try again later'
+                })
             const meeting = await Meeting.create({
-                meetingID: req.body.meetingID,
+                meetingID: id,
                 title: req.body.title,
                 description: req.body.description,
                 dueDate: req.body.dueDate,
@@ -106,7 +129,7 @@ module.exports = {
                 meetingID: meeting.meetingID,
                 role: 1
             });
-            res.send({userID: user.id});
+            res.send({userID: user.id, meetingID: meeting.meetingID});
         } catch (error) {
             res.status(500).send({
                 error: 'Something went wrong with creating a meeting, please try again later'
