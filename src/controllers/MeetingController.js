@@ -12,12 +12,14 @@ async function getUsers(meetingID) {
     });
     const users = [];
     for (const i in userID) {
-        await users.push(await User.findOne({
+        let user = await User.findOne({
             attributes: ['name', 'id'],
             where: {
                 id: userID[i].dataValues.userID
             }
-        }));
+        });
+        user.dataValues.role = userID[i].role;
+        await users.push(user);
     }
     return users;
 }
@@ -145,6 +147,22 @@ module.exports = {
         } catch (error) {
             res.status(500).send({
                 error: 'Something went wrong with getting users in this meeting, please try again later'
+            })
+        }
+    },
+    async getAdmins(req, res) {
+        try {
+            const adminList = await MeetingMember.findAll({
+                attributes: ['userID'],
+                where: {
+                    meetingID: req.query.meetingID,
+                    role: 1
+                }
+            });
+            res.send(adminList);
+        } catch (error) {
+            res.status(500).send({
+                error: 'Something went wrong retrieving this meetings admins'
             })
         }
     },

@@ -26,6 +26,8 @@ module.exports = (app) => {
 
    app.get('/getUsers', MeetingController.getUsers);
 
+   app.get('/getAdmins', MeetingController.getAdmins);
+
    app.post('/editMeetingType', MeetingController.editMeetingType);
 
    app.post('/editMeetingDetails', MeetingController.editMeetingDetails);
